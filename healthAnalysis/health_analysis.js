@@ -25,6 +25,27 @@ function resetForm (){
 }
 function generateReport (){
     const numPacient = pacients.length;
+    const contadorDeCondicion = {
+        Diabetes: 0,
+        Thyroides: 0,
+        "High Blood Pressure": 0,
     
-
+    };
+    const contadorDeCondicionGenero = {
+        Male: {
+        Diabetes: 0,
+        Thyroides: 0,
+        "High Blood Pressure": 0,
+        },
+        female: {
+        Diabetes: 0,
+        Thyroides: 0,
+        "High Blood Pressure": 0,
+    },
+  }
 }
+   for (const patient of pacients){
+    contadorDeCondicion[patient.condicion]++;
+    contadorDeCondicionGenero[patient.gender][patient.condicion]++;
+   }
+   reporte.innerHTML
