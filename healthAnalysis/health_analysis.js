@@ -1,5 +1,5 @@
 const addPacienteButton = document.getElementById('addPatient');
-const reporte = document.getElementById('report');
+const report = document.getElementById('report');
 const btnSearch = document.getElementById('btnSearch');
 const pacients = [];
 
@@ -11,7 +11,7 @@ function addPacient() {
  
  // Empuja a el paciente a un arreglo para su manipulacion
  if(name && gender && age && condition){
-    pacients.push({ name, genero: gender.value, age, condition});
+    pacients.push({ name, gender: gender.value, age, condition});
     resetForm();
     generateReport();
  }
@@ -24,7 +24,7 @@ function resetForm (){
     
 }
 function generateReport (){
-    const numPacient = pacients.length;
+    const numPacients = pacients.length;
     const contadorDeCondicion = {
         Diabetes: 0,
         Thyroides: 0,
@@ -32,6 +32,7 @@ function generateReport (){
     
     };
     const contadorDeCondicionGenero = {
+// Recuerda que male y female son objetos
         Male: {
         Diabetes: 0,
         Thyroides: 0,
@@ -42,10 +43,29 @@ function generateReport (){
         Thyroides: 0,
         "High Blood Pressure": 0,
     },
+  };
+
+  
+   for (const patient of pacients){
+    contadorDeCondicion[patient.condition]++;
+    contadorDeCondicionGenero[patient.gender][patient.condition]++;
+
+
+}
+   report.innerHTML = `Number of patients: ${numPacients}<br><br>`;
+   report.innerHTML += `Conditions Breakdown:<br>`;
+   for (const condition in contadorDeCondicion) {
+	report.innerHTML += `${condition}: ${conditionsCount[condition]}<br>`;
+}
+
+
+   report.innerHTML += `<br>Gender-Based Conditions:<br>`;
+   for (const gender in contadorDeCondicionGenero){
+    report.innerHTML += `${gender}:<br>`;
+    for(const condition in contadorDeCondicionGenero[gender]){
+        report.innerHTML += `${condition}: ${contadorDeCondicionGenero[gender][condition]}`
+    }
   }
 }
-   for (const patient of pacients){
-    contadorDeCondicion[patient.condicion]++;
-    contadorDeCondicionGenero[patient.gender][patient.condicion]++;
-   }
-   reporte.innerHTML
+
+addPacienteButton.addEventListener("click", addPacient);
