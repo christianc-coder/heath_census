@@ -70,5 +70,35 @@ function generateReport (){
     }
   }
 }
-
 addPacienteButton.addEventListener("click", addPacient);
+
+function searchCondition() {
+const conditionIn = document.getElementById('conditionInput').value.toLowerCase().trim();
+const ResultadoDiv = document.getElementById('result');
+ResultadoDiv.innerHTML = "";
+
+fetch('health_analysis.json')
+.then( response => response.json())
+.then(data => {
+    const condicion = data.conditions.find( item => item.name.toLowerCase().includes(conditionIn));
+if(condicion){
+    const sintomas = condicion.symptoms.join(', ');
+    const prevencion = condicion.prevention.join(', ');
+    const tratamiento = condicion.treatment;
+   
+   ResultadoDiv.innerHTML += `<h2>${condicion.name}</h2>`;
+   ResultadoDiv.innerHTML += `<img src="${condicion.imagesrc}" alt="imagen">`;
+   
+   ResultadoDiv.innerHTML += `<p><strong>Symptoms:</strong> ${sintomas}</p>`;
+   ResultadoDiv.innerHTML += `<p><strong>Prevention:</strong> ${prevencion}</p>`;
+   ResultadoDiv.innerHTML += `<p><strong>Treatment:</strong> ${tratamiento}</p>`;
+   } else {
+   ResultadoDiv.textContent = `No se encontraron datos del tratamiento`
+   }
+})
+.catch(error => {
+    console.error('Error', error);
+    ResultadoDiv.textContent = `Hubo un error en la obtencion de datos`;
+ });
+}
+btnSearch.addEventListener("click", searchCondition);
