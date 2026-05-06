@@ -1,8 +1,8 @@
 {
     "conditions": [
       {
-        "name": "Thyroid",
-        "imagesrc":"thyroid.jpg",
+        "name": "Tiroides",
+        "imagesrc":"https://www.quironsalud.com/blogs/es/objetivo-peso-saludable/tiroides.ficheros/2307078-Cancer_tiroides_quironsalud.jpg",
         "symptoms": [
           "Fatigue",
           "Weight gain or loss",
@@ -19,7 +19,7 @@
       },
       {
         "name": "Diabetes",
-        "imagesrc":"diabeties.jpg",
+        "imagesrc":"https://www.niddk.nih.gov/-/media/Images/Health-Information/Diabetes/BloodGlucoseImageSPANISH2Feb231200x800.jpg",
         "symptoms": [
           "Frequent urination",
           "Increased thirst",
@@ -35,8 +35,8 @@
         "treatment": "Management includes medication, insulin therapy, and lifestyle changes."
       },
       {
-        "name": "High Blood Pressure",
-        "imagesrc":"blood_pressure.jpg",
+        "name": "presion arterial",
+        "imagesrc":"https://www.mdsaude.com/wp-content/uploads/presion-arterial.jpg",
         "symptoms": [
           "Headaches",
           "Shortness of breath",
