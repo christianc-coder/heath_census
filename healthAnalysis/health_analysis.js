@@ -16,13 +16,15 @@ function addPacient() {
     generateReport();
  }
 }
+
 function resetForm (){
     const name = document.getElementById('name').value = "";
-    const gender = document.querySelector('input[name="gender"]:checked').checked = false;
+    const selectGender = document.querySelector('input[name="gender"]:checked')
+    if(selectGender){selectGender.checked = false};
     const age = document.getElementById('age').value = "";
     const condition = document.getElementById('condition').value = "";
-    
 }
+
 function generateReport (){
     const numPacients = pacients.length;
     const contadorDeCondicion = {
@@ -32,20 +34,20 @@ function generateReport (){
     
     };
     const contadorDeCondicionGenero = {
-// Recuerda que male y female son objetos
+// Recuerda male y female son objetos
         Male: {
         Diabetes: 0,
         Thyroides: 0,
         "High Blood Pressure": 0,
         },
-        female: {
+        Female: {
         Diabetes: 0,
         Thyroides: 0,
         "High Blood Pressure": 0,
     },
   };
 
-  
+//Solo aumenta el numero de los key
    for (const patient of pacients){
     contadorDeCondicion[patient.condition]++;
     contadorDeCondicionGenero[patient.gender][patient.condition]++;
@@ -53,9 +55,10 @@ function generateReport (){
 
 }
    report.innerHTML = `Number of patients: ${numPacients}<br><br>`;
+   
    report.innerHTML += `Conditions Breakdown:<br>`;
    for (const condition in contadorDeCondicion) {
-	report.innerHTML += `${condition}: ${conditionsCount[condition]}<br>`;
+	report.innerHTML += `${condition}: ${contadorDeCondicion[condition]}<br>`;
 }
 
 
@@ -63,7 +66,7 @@ function generateReport (){
    for (const gender in contadorDeCondicionGenero){
     report.innerHTML += `${gender}:<br>`;
     for(const condition in contadorDeCondicionGenero[gender]){
-        report.innerHTML += `${condition}: ${contadorDeCondicionGenero[gender][condition]}`
+        report.innerHTML += `${condition}: ${contadorDeCondicionGenero[gender][condition]}<br>`
     }
   }
 }
